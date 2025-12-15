@@ -321,12 +321,15 @@ mod tests {
                 location: Location::Standard,
                 modifiers: Modifiers::SHIFT,
                 text: Some("X".into()),
+                repeat: false,
             }),
             KeyInput::from(Key::Char('X')),
         );
         assert_eq!(
             KeyInput::from(KeyEvent::KeyReleased {
                 key: IcedKey::Character("x".into()),
+                modified_key: IcedKey::Character("x".into()),
+                physical_key: Physical::Code(Code::KeyX),
                 location: Location::Standard,
                 modifiers: Modifiers::CTRL,
             }),
@@ -344,6 +347,7 @@ mod tests {
                 location: Location::Standard,
                 modifiers: Modifiers::SHIFT,
                 text: Some("X".into()),
+                repeat: false,
             })),
             KeyInput::from(Key::Char('X')),
         );

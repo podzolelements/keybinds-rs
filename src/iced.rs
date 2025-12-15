@@ -67,7 +67,10 @@
 //!     }
 //! }
 //!
-//! iced::run("My App", App::update, App::view).unwrap();
+//! iced::application(App::default, App::update, App::view)
+//!     .title("My App")
+//!     .run()
+//!     .unwrap();
 //! ```
 use crate::{Key, KeyInput, Mods};
 use iced::keyboard::key::Named;
@@ -223,7 +226,7 @@ impl From<&KeyEvent> for KeyInput {
     ///
     /// ```
     /// use keybinds::{KeyInput, Mods};
-    /// use iced::keyboard::{Event, Modifiers, Key};
+    /// use iced::keyboard::{Event, Modifiers, Key, key::{Code, Physical}};
     ///
     /// // Key event for Ctrl+Shift+X
     /// let event = Event::KeyPressed {
@@ -234,6 +237,7 @@ impl From<&KeyEvent> for KeyInput {
     /// #   location: iced::keyboard::Location::Standard,
     /// #   text: None,
     /// #   physical_key: iced::keyboard::key::Physical::Code(iced::keyboard::key::Code::KeyX),
+    ///     repeat: false,
     /// };
     /// // `Mods::SHIFT` is removed because 'X' is already modified by Shift key
     /// assert_eq!(KeyInput::from(event), KeyInput::new('X', Mods::CTRL));
@@ -242,6 +246,8 @@ impl From<&KeyEvent> for KeyInput {
     /// let event = Event::KeyReleased {
     ///     // ...
     /// #   key: Key::Character("x".into()),
+    ///     modified_key: Key::Character("x".into()),
+    ///     physical_key: Physical::Code(Code::KeyX),
     /// #   modifiers: Modifiers::CTRL | Modifiers::SHIFT,
     /// #   location: iced::keyboard::Location::Standard,
     /// };

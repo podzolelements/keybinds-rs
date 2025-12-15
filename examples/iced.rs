@@ -143,7 +143,8 @@ impl Example {
 }
 
 fn main() -> iced::Result {
-    iced::application("Keybinds Example", Example::update, Example::view)
+    iced::application(Example::default, Example::update, Example::view)
+        .title("Keybinds Example")
         .subscription(Example::subscription)
         .theme(Example::theme)
         .window_size((600.0, 400.0))
